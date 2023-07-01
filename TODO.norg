@@ -1,0 +1,96 @@
+@document.meta
+title: TODO
+description:
+authors: thegusbus
+categories:
+created: 2023-06-30
+updated: 2023-07-01
+version: 1.1.1
+@end
+
+* TODO: 06/02/2023
+  - (x) Cleanup how sim log files are found and passed to the `analysis.py` script. -> 2 options:
+        1. Find all relevant files before hand, store filenames in temp file, then cat file to parser (?) -> allows us to keep a record of the list of filenames passed to the paser (could be useful for debugging/logging).
+        Store tmp file as a hidden file to avoid the user havint to really see the file.
+        2. Pass output of find command directly to parser script as cmd line argument (output of find command will populate `sys.argv` array)
+  -- (x) Using find is faster that fd -> dump find results to temp files and pass the output of catting temp file as parser script argument. See example code snippet below.
+  -- (x) Create parser helper script to handle temp file generation. *Blank the temp file at the start of the helper script execution.* -> Ensures tmp file won't become massive.
+
+  - (x) Automatically plot bar chart of peak efficies using parser output .
+  - ( ) Grid searh (dp,tn) parameter space to identify the limits of allowble shell size. -> LMFIT (?)
+  - (x) Simulate alternative dopant concentrations.
+  - ( ) Investigate caching meshgrid (dp,tn) solutions -> move solution computation to separate function and invoke built-in Python LRU cache  methd (functools).
+  -- ( ) -> move solution computation to separate function and invoke built-in Python LRU cache  methd (functools).
+
+* PeGenerators Module:
+  - (x) Remove class definition and just define the functions as module functions. -> No need for a class.
+  - (x) Automatically set (dp,tn) mesh limits based on material and NW diameter.
+
+* Single Device Simulation:
+  - (-) Refactor `SingleDeviceAnalyticalModel` class to separate submodule and just `AnalyticlModel class` to access required methods.
+  -- (x) Move `SingleDeviceAnalyticalModel` to separate submodule.
+  -- ( ) Integrate submodule with rest of simulator.
+
+* NWBV Manuscript - TODO:
+  ___
+** Poisson's Equation Section:
+   - Add figures to illustrate the PE solves output and functionality.
+   -- ( ) E-field distribution
+   -- ( ) Electric potential distribution
+   -- ( ) Sample band diagrams for each of the given materials
+   -- ( ) Transcendental equation graphical solution (??)
+   ___
+** Carrier Recombination Statistics:
+*** SRH Statistics:
+    - ( ) Elaborate on the SRH recombination modeling formalism used. -> Discus recombination process assumptions, deep-level trap stats, maximization of the recombination rate, limiting factors in low-injection conditions (i.e. *minority carrier lifetimes*), capture cross-sections, trap state density
+**** Deep States [_Schubert1994_]:
+     - Deep centers are characterized by their *electronic charge state* -> (*neutral* , *donor-like*, *acceptor-like*). -> Their energy levels are /*deep*/ within the forbidden energy gap, meaning their energy levels are /*far away*/ from the band edges. (i.e. E_t >> kT, for T=300K)
+     - Deep levels have *short range confining potentials* (i.e. they are highly localized -> their wavefunctions do not extend over a very long atomic range -> ~ a *few atomic radii*). *Shallow impurities* have *long range Coulombic confining potentials*, resulting in more *delocalized states* due to posessing wavefunctions that extend over longer atomic range (length scale) -> *> a few atomic radii*.
+     - Electrons bound to deep levels are thus, typically *localized (i.e. confined) within the volume of 1 or 2 unit cells* -> Shallow impurities on the other hand, are localized to volumes on the order of *hudreds to thousands of unit cells*.
+     -- The properties of deep levels are thus determined by the *chemical nature of the center*, whereas the chemical nature of shallow impurities is of minimal significance to the determination of the properties -> (provided the shallow impurity has a *large Bohr radius*).
+     -- We can represent the nature of the deep level's localization (i.e. confinement) by the *degree of UNCERTAINTY in *momentum space* -> *This is consequence of both Heisenberg's uncertainty principle, Pauli's exclusion principle*. -> *_Recall_*: The dispersion relation (i.e. E(k) diagram -> /bandstructure/) yields considerable information about the localization/distribution of the electron in momentum space.
+     --- A very small positional uncertainty ($\Delta x$) correponds to a *high degree of momentum uncertainty*. -> Thus, we observe a much smaller positional uncertainty in the deep center's wavefunction compared to a shallow impurity wavefunction, which in turn will have a small degree of momentum uncertainty, and higher degrees of positional uncertainty. -> QQ: Is this what drives the formation of impurity bands?? (Further delocalization of the the already quasi-localized states yields overlapping of shallow states, thus forming a */continuum/* of states (i.e. a *BAND* of impurity states) upon sufficient overlap between the shallow states).
+
+     -- Effective Mass Approximation:
+     --- The effective mass approximation describes the forces exerted upon a /nearly/ free electron by the bound ion cores of the lattice as well as the surrounding electron, as it traverses the semiconductor crystal lattice. The effective mass approximation is a direct consequence of the symmetries that arise from the *PERIODICITY OF THE CRYSTAL LATTICE*. -> The underlying lattice periodicity is reflected in the Coulombic potential experienced by the free electron. Thus, when the lattice's periodicity is disturbed, so too is the periodicity of the Coulombic potential. -> Carriers bound to a deep center are highly localized to a small volume surrounding the center. As a result, they are *NOT SUBJECT TO A PERIODIC POTENTIAL*, and thus, the basis of the effective mass approximation is no longer applicable.
+     --- The contribution of the deep state to the crystal Coulombic potential must be taken into account for deep level impurities. -> In the *limit of a strong deep level potential* we can treat the deep level's crystal potential as a small *PERTURBATION* of the impurity (ion-core) potential to simplify the treatment of the deep centers -> (WKB approx., etc.??) -> In such a case, the *energy of the deep center then primarily depends on the nature of the deep center* rather than the host semiconductor.
+     -- *Donor-like* Deep Centers:
+     --- Donor-like deep centers are characterized by the trap state activation energy (E_t) substantially exceeding the thermal energy (kT). -> (Et = Ec - E_T).
+     --- The trap state's activation energy corresponds to the energy required to ionize the trap state. -> Donor-like deep centers are ionized within *p-type* materials, and the *free hole carrier concentration is REDUCED due to the presence of the donor-like traps* (donor-like states become positively charged upon ionization)
+     --- The *impurity wavefunction decay length L is proportional to the square-root of the reciprocal trap state activation energy.* -> L ~ exp(-E_)
+     ---- Deep level donor and acceptor trap states are *not ionized at room temperature* because their activation greatly exceeds the average kinetic energy of the free carriers within the crystal (i.e. the *thermal voltage*, V_th).
+     --- Donor-like DX states yield *large energy differences between optical and thermal ionization energies*. -> This implies a strongly coupled relationship between the crystal and deep level. [_mooneyDeepDonorLevels1990_]
+     --- The *donor biniding energy* determines the *free electron concentration* in thermal equilibrium at a given temperature.
+     --- The *large binding energy* of deep levels results in the *reduction of the free carrier concentration*.
+
+     - SRH recombination is deep-center mediated non-radiative carrier recombination.
+     - Deep centers can *compensate shallow dopant states*, and thus reduce the carrier concentration as a consequence.
+     - Deep centers also act to effectively *reduce the carrier mobility* as a consequence of simultaneously decreasing the free carrier concentration whilst increasing the concentration of localized charged states within the crystal.
+     - Deep centers *reduce radiative efficiency* by promoting non-radiative carrier recombination via the localized (charged) deep centers. -> This also reduces the *minority carrier lifetimes* within the material. -> In the case of a p-n junction, the reduced carrier mobility due to the high concentration of impurity atoms & increases the minority carrier's likelihood of interaction with the localized charged states. This decreases the likelihood of minority carriers diffusing within the vicinity of the SCR where they can be swept across the junction by the built-in electric field distribution, to become majority carriers and recombine.
+       The same effects on minority carrier transport are observed for heavily-doped bulk semiconductor materials.
+     - Main consequences of trap states:
+       i. Reduced *luminescence efficiency*
+       ii. Shorter minority *carrier lifetimes*
+       iii. Shorter *diffusion length*
+       iv. Compensation of intentional shallow impurities (dopants)
+       v. Reduced *drift velocity*
+
+
+
+*** QNR Recombination:
+    - ( ) QNR minority carrier lifetimes vs SCR lifetimes
+    - ( ) Relationship between carrier diffusion length, mobility, and diffusion constant and how their 'net'/'aggregate' effects are reflected in the resulting carrier tx behaviour and subsequent J-V characteristics.
+
+*** Nanowire Morphology:
+    - ( ) Relationship between nanowire morphology and the observed carrier transport mechanisms -> How are the effects stemming from variations in the core-shell structure (i.e. predominantly p-core diameter, n-shell thickness, i-shell thickness...consider total nw radius and height as a secondary feature??) reflected in the values that characterize the transport mechanisms, and thus recombination (and collection) processes (i.e. diffusion lengths, carrier lifetimes /mainly/...mobility and diff constant can also be discussed for supporting purposes),
+    - ( ) How is the device's energy conversion performance ultimately affected as a function the morphology variations -> Discuss trends observed in Jsc, Voc, FF, efficiency values.
+    ___
+** Many-Body Effects:
+*** Bandgap Narrowing:
+    -
+*** Band Tailing:
+*** Impurinty Band Formation:
+*** Impurinty Band Formation:
+
+
+

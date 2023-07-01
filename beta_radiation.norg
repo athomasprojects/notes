@@ -1,0 +1,38 @@
+* Beta Radiation
+** Stopping Power
+   - Proportional to the # of electrons in the /path/ of the beta particle. -> (i.e. the /*aerial density*/ of the electrons within the absorber medium.)
+   -- /Aerial electron density/ -> ~proportional to the product of the absorber density * its /*linear thickness*/.
+   -- Thus,
+      $stopping power \propto electron aerial density \propto (density * linear thickness)$
+** Bragg's Rule
+   - Atoms contribute nearly independently to the stopping power, thus making their effects /additive/. -> neglects the effects on the chemical binding on the /ionization potential, I/.
+
+   - The stopping power of a *compound mixture* can be expressed as *linear combination* of the constituent atom stopping powers weighted by their atom compositional fractions.
+** Backscattering
+   - Backscattering = large-angle deflections of electrons along their trajectories within the absorber medium, such that the electrons are re-emitted from the absorber.
+
+   -- Results in the /backscattered eletrons/ not depositing the entirety of their kinetic energy within the absorbing medium.
+   - Electron backscattering within a detector /entrance-window/ (i.e. /dead-layer/) will escape detection entirely, thus altering the response of the detector.
+
+   - Backscattering depends heavily on *incident beta energy*, and absorber material *atomic number*. -> most pronounced for electrons with *low incident energy* and absorbers with *high atomic number*.
+
+   -- Plots of fraction of normally incident electrons that are backscattered from thick slabs of various materials as a function of incident beta energy show a sigmoid curve.
+** Beta Range
+   - Range = total absorber material density thickness required to fully stop the incident beta rays. -> (i.e. incident beta K.E. -> 0).
+   -- Beta range is distribution -> depends on incident beta energy.
+
+   - Beta particles are easily *scattered* during collisions since they have the same mass as the absorber orbital electrons.
+   -- Within the absorber medium follow */tortuous paths/* as a result. -> Higher frequency of scattering interactions.
+
+   - *Range* -> absorber thickness required to ensure ~no beta particles can penetrate the entire absorber thickness. -> (i.e. ~no betas can make it to the end/other side of the absorber material.)
+*** (Absorber) Half-Thickness
+    - ~1/8 of beta range for beta particles.
+*** Density Thickness
+    - Density thickness is defined as the product of the absorbing medium's density and linear thickness,
+      $density thickness = density * linear thickness$
+    - Useful metric for specifying the stopping power of an absorbing medium /*independently*/ of its material/atomic composition.
+    -- Absorbers with similar density thicknesses should have similar stopping powers. -> this result is expected because of the dependence of /density/.
+    --- Materials with simial densities will thus yield simial density thicknesses for the same linear thickness.
+
+
+

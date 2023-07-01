@@ -1,0 +1,33 @@
+@document.meta
+title: Python Logging
+description: Some notes about implementing a logging system in Python
+author: Amanda Thomas
+categories: python-docs
+date: 2023-06-21
+version: 0.1
+@end
+
+.toc
+
+- We can use the builtin `logging` library to get started with setting up our log system. - A logging system is just a procedure for *tracking events* that occur when our program is executed.
+-- Using Python's builtin logging API ensures that all Python modules can interface with the logging system.
+-- We can configure our logger to direct logging output to a file so that we can go back and analyse the logs at any point in time.
+-- We can also customize the contents of the log message to contain whatever information we think could be useful for debugging.
+
+* Log Levels:
+  - There are several log /levels/ shown below in *increasing levels of severity*:
+  -- /DEBUG/
+  -- /INFO/
+  -- /WARNING/
+  -- /ERROR/
+  -- /CRITICAL/
+  - When we use the `logging` module Python will only output logging information for anything /*at or above the logging level*/.
+    -
+
+@code python
+# Here is a basic log system implementation
+import logging
+
+# Let's print a WARNING log message
+
+@end

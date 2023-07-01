@@ -1,0 +1,128 @@
+@document.meta
+title: Pathlib notes
+description:
+authors: thegusbus
+categories:
+created: 2023-06-21
+updated: 2023-06-25
+version: 1.1.1
+@end
+
+@document
+title: Python Pathlib Module Notes
+description: Some basic info on how to use Python's built-in Pathlib module
+author: Python docs
+categories: python-docs
+created: 2023-05-17
+@end
+
+.toc
+___
+
+* Notes:
+  - Examples shown below taken from Python docs: {https://docs.python.org/3/library/pathlib.html}
+  - Pathlib module is part of the built-in library
+  - Contains class represenatations of the filesystem paths using operating system-appropriate semantics.
+  -- Different path semantics for Windows, Unix, and MacOS -> Pathlib ensures path objects adhere to these OS-dependent rules.
+  - 2 categories of /path/ classes: /pure paths/ and /concrete paths
+  -- /Path/ object is sufficient for most use cases -> instantiates a concrete path for the platform that the code is running on.
+  -- /Pure paths/ tend to be more useful in special cases:
+  --- i. Want to manipulate Windows path on a Unix machine (or vice versa). -> /PureWindowsPath/ object allows us to instantiate a /WindowsPath/ object when running on a Unix system.
+  --- ii. Want to ensure our code only manipulates path without actually accessing the OS. ->  Instantiating one of the /pure path/ classes may be useful since they do not have any OS-access operations.
+  - Path objects are */immutable/* -> this makes them *hashable* and prevents a class of programming errors. -> We use path objects to avoid the littany of errors that can arise when passing path data as strings in Python.
+* Basic Code Examples:
+** List subdirectories within given directory:
+   - When the path points to a directory, we can list its contents using the /`iterdir()`/ method.
+   -- /iterdir()/ creates an iterator object consisting of the child nodes of the current node in the directory tree.
+   -- The /./ and /../ directories are *not included* in the the /iterdir()/ iterator.
+
+   - We can use the /`is_file()`/ method to check if the node the path points to is regular file or a symbolic link to that points to a regular file.
+   -- Returns /`False`/ if the path points to another kind of file, path doesn't exist, is a broken symlink or if other errors are propagated (e.g. permission denied, etc.)
+   ___
+   @code python
+   from pathlib import Path
+
+   p = Path('.') # instantiatn Path object
+   [x for x in p.iterdir() if x.is_dir()]
+   @end
+   ___
+** List Python source files in current directory tree:
+   ___
+   @code python
+   from pathlib import Path
+
+   p = Path('.')
+   # Glob match for all files in this directory tree ending in the `.py`
+   src_files = list(p.glob('**/*.py'))
+   @end
+   ___
+** Navigate within a directory tree:
+   - *Note*: the forward slash /`/`/ acts as a /joiner/ when operating on path objects -> /Path/ class implements its own /__truediv__/ method which overrides the default division behaviour of the forward slash.
+
+   - In this example we navigate the directory tree structure of a give directory by creating a /query/ path that we will instruct Python to traverse along the directory tree. We basically specify the nodes of the tree that must be visited to reach the destination subdirectory as strings, separated by slashes.
+
+   - The nodes are delimited by the /`/`/ operator which overrides the default division behaviour and instead acts as a /joiner/ between the base directory tree specified in the initial Path object and the tree nodes supplied as strings.
+
+   - Each of the tree nodes supplied correspond to subdirectories in the tree structure.
+
+   - The /`resolve()`/ method converts the path to an absolute path.
+   ___
+   @code python
+   from pathlib import Path
+
+   p = Path('/etc') # set base directory in directory tree to `/etc` directory
+   q = p / 'init.d' / 'reboot' # append 'nodes' of directory tree to visit. Delimit nodes with '/'
+   print(q) # print directory traversal query string
+   q.resolve() # create new directory tree structure that points to the desired endpoint
+   @end
+   ___
+** Querying path properties:
+   - Query path oject to see get information about the path properties
+   ___
+   @code python
+   from pathlib import Path
+   p = Path('some_dir_tree')
+
+   query = p / 'some_dir_tree_node' / 'another_dir_tree_node' / 'nth_dir_tree_node'
+   query.exists() # does the queried path exist?
+   query.is_dir() # is the queried path a directory?
+   @end
+   ___
+** Opening files:
+   - *Note*: When dealing with file IO it is best to use the built-in Python IO context managers properly manage the process of opening and closing the file to access the data stream.
+   -- The built-in file context managers will prevent the corruption of the opened file's data if the parent process within which the code is running suddenly exits or crashes. -> context manager has a special protocol built-in to handle closing files.
+
+   ___
+   @code python
+   from pathlib import Path
+   p = Path('some_dir_tree')
+   query = p / 'some_dir_tree_node' / 'another_dir_tree_node' / 'nth_dir_tree_node'
+   with q.open() as f: f.readline() # open file at specified node of the directory tree structure and read each line
+   @end
+   ___
+* Some useful Pathblib API information:
+  - Here are some useful attributes of Path (Pure/path/) objects:
+
+  - To represent a path object call the `str()` method on the path object to get the string representation. -> This allows us to easily pass around and manipulate the data that the path object represents in other libraries without needing to know the details of the path object.
+
+  - Forward slash operator helps create /child paths/ (similar in functionality to `os.path.join()`).
+  -- Previous ignored if the argument passed to the path object constructor is an /*absolute path*/.
+  ___
+  @code python
+  from pathlib import Path
+  p = Path('path_to_some_dir_tree_node')
+
+  # Name of the endpoint node in the directory tree
+  endpoint_name = p.name
+  # Extension of the endpoint node
+  endpoint_extension = p.suffix
+  # Constituent nodes that make up the path to the endpoint node in the directory tree structure
+  path_nodes = p.parts
+  # Find the
+  @end
+  ___
+
+
+
+  ___
+

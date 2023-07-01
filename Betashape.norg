@@ -1,0 +1,6 @@
+** Betashape software
+   - Input: Text file -> ENSDF database file -> {https://www.nndc.bnl.gov/nudat3/DecayRadiationServlet?nuc=63Ni&unc=NDS}
+   - Run as shell script
+   - Output format: text file -> dN/dW data (# of beta decay events per unit energy)
+   - Convert dN/dE output plot to histogram to get probability density (pdf) -> integrate (pdf * energy axis values) w.r.t. energy to obtain cdf (cumulative distribution function).
+

@@ -1,0 +1,92 @@
+* Results:
+** Effect of doping:
+   - Ionized dopant distributions control the extent of the SCR (i.e. the
+     junction depth, or depletion region width).
+
+   - Heavy doping reduces depletion region width, thus reducing the extent of
+     the SCR (i.e. the built-in electric field intensity distribution)
+     throughout the junction.
+
+   - Light doping increases the SCR width -> at the cost of a weaker electric
+     field intensity strength -> at the cost of a weaker electric field
+     intensity strength.
+
+   - The strength of the built-in electric field determines how quickly
+     minority carriers are swept across the junction. (i.e. E-field intensity
+     determines the *force* with which minority carriers are accelerated across
+     the junction. -> Weaker E-field, results in reduced collection efficiency
+     since fewer excess minority carriers will make it across the junction and
+     recombine.
+
+   - Doping affects the bandgap energy -> at sufficiently high dopant
+     concentrations the sc transitions from a non-degenerate state to a
+     degenrate state. -- The the large concentration of carriers perturbs the
+     lattice symmetries, thus altering the crystal structure and the energy
+     bandstructuries, thus altering the crystal structure and the energy
+     bandstructure. -- *Many-body effects* -> bandgap narrowing is one of the
+     prominent many-body effects, reduction of the intrinsic carrier from
+     non-degenerate values is also observed.
+
+** Effect of nanowire morphology (i.e. core and shell thicknesses):
+   - Optimum core and shell thicknesses heavily influenced by carrier lifetimes
+     within the respective regions.
+   - 2 carrier lifetime cases to consider: -- i. Homgeneous carrier lifetimes
+     throughout the junction (same carrier lifetimes in QNR and SCR) ->
+     corresponds to *inhomegeous trap distribution* throughous the junction.
+   --- In the case of inhomogeneous tra -- ii. Inhomegeneous carrier lifetimes
+       (QNR, and SCR lifetimes are different).
+
+** Effect of nanowire height and total diameter:
+    *** Height:
+        - Increased wire height increases the available volume of source
+          material, thus increasing the incident beta flux, and subsequently
+          the electron-hole pair generation rate within the absorber. -> This
+          ultimately increases the device short-circuit density which is
+          characterized by the flux of generated electron-hole pairs within the
+          space-charge region.
+    *** Total wire diameter:
+        - The total nanowire diameter dictates the source material filling
+          ratio (F-ratio) for a given array pitch.
+        - Wire diameter also affects the device OCV.
+        -- The potential drop across the junction is assumed to fall solely
+           across the SCR. -> As a result, the extent of the SCR within the
+           junction is limited to the wire diameter across which the built-in
+           electric field can be established. The extent of the built-in
+           electric field affects the transport of minority carriers across the
+           junction by mediating the device collection efficiency.
+        -- Smaller depletion region widths mean fewer generated excess minority
+           carriers will `see` the built-in field and thus will not be swept
+           across the junction, therefore reducing the overall device
+           conversion efficiency.
+*** Effect of array pitch:
+    - Relationship between nanowire diameter and pitch affects the density of
+      wires in the nanowire pad as well as the fraction of the volume in
+      between the wires that is capable of accomodating the radioisotope
+      source.
+
+    - Depositing a greater volume of source material is advantageous up to a
+      point. -> More source material surrounding the wires provides a greater
+      flux of incident beta particles that can be absorbed by the sc, thus
+      increasing the flux of generated electron-hole pairs in the sc. --
+      Increasing the source volume yields greater input power densities, up to
+      a saturation point, beyond which the source power stagnates due to
+      dominanting *self-absorption* effects.
+
+    - It appears that the ratio of the nanowire diameter to the arrya pitch
+      *(d:p ratio)* plays an potentially significant role in overall efficiency
+      of the NW-array device. -- Previous works have reported the existence of
+      an optimum ratio between the nanowire diameter and array pitch of approx.
+      0.8 [Wagner2020] -> we have observed similar trends in improvements to
+      device performance with increased diameter-pitch ratios. -- Despite
+      corresponding to reduction in the overall volume of source material
+      within the array, higher (d:p) ratios yield larger *densities of
+    nanowires (i.e. increased aerial nanowire densities)*  -> This factor
+      appears to yield significant gains in device performance in certain array
+      configurations. -- Higher nanowire aerial densities correspond to
+      increases in the total volume of target material interacting with the
+      emitted betas. -> By increasing the density of wires, we effectively
+      increase the capture efficiency of the device (i.e. the fraction of
+      emitted betas that are absorbed by the semiconductor material).
+
+
+
