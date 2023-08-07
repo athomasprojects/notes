@@ -4,7 +4,7 @@ description:
 authors: thegusbus
 categories:
 created: 2023-06-21
-updated: 2023-06-30
+updated: 2023-07-19
 version: 1.1.1
 @end
 
@@ -14,3 +14,5 @@ version: 1.1.1
   - {:Betashape:}
   - {:Python:}
   - {:Green's Functions:}
+  - {:Treesitter Queries:}
+

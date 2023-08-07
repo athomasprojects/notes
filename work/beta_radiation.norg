@@ -1,3 +1,13 @@
+@document.meta
+title: beta_radiation
+description:
+authors: thegusbus
+categories:
+created: 2023-07-19
+updated: 2023-07-19
+version: 1.1.1
+@end
+
 * Beta Radiation
 ** Stopping Power
    - Proportional to the # of electrons in the /path/ of the beta particle. -> (i.e. the /*aerial density*/ of the electrons within the absorber medium.)

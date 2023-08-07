@@ -4,7 +4,7 @@ description:
 authors: thegusbus
 categories:
 created: 2023-06-30
-updated: 2023-07-01
+updated: 2023-07-02
 version: 1.1.1
 @end
 
@@ -32,14 +32,14 @@ version: 1.1.1
   -- ( ) Integrate submodule with rest of simulator.
 
 * NWBV Manuscript - TODO:
-  ___
+ ___
 ** Poisson's Equation Section:
    - Add figures to illustrate the PE solves output and functionality.
    -- ( ) E-field distribution
    -- ( ) Electric potential distribution
    -- ( ) Sample band diagrams for each of the given materials
    -- ( ) Transcendental equation graphical solution (??)
-  ___
+ ___
 ** Carrier Recombination Statistics:
 *** SRH Statistics:
     - ( ) Elaborate on the SRH recombination modeling formalism used. -> Discus recombination process assumptions, deep-level trap stats, maximization of the recombination rate, limiting factors in low-injection conditions (i.e. *minority carrier lifetimes*), capture cross-sections, trap state density
@@ -83,7 +83,7 @@ version: 1.1.1
      --- The *donor biniding energy* determines the *free electron concentration* in thermal equilibrium at a given temperature.
      --- The *large binding energy* of deep levels results in the *reduction of the free carrier concentration*.
 
-    ___
+  ___
 *** QNR Recombination:
     - ( ) QNR minority carrier lifetimes vs SCR lifetimes
     - ( ) Relationship between carrier diffusion length, mobility, and diffusion constant and how their 'net'/'aggregate' effects are reflected in the resulting carrier tx behaviour and subsequent J-V characteristics.
@@ -91,13 +91,17 @@ version: 1.1.1
 *** Nanowire Morphology:
     - ( ) Relationship between nanowire morphology and the observed carrier transport mechanisms -> How are the effects stemming from variations in the core-shell structure (i.e. predominantly p-core diameter, n-shell thickness, i-shell thickness...consider total nw radius and height as a secondary feature??) reflected in the values that characterize the transport mechanisms, and thus recombination (and collection) processes (i.e. diffusion lengths, carrier lifetimes /mainly/...mobility and diff constant can also be discussed for supporting purposes),
     - ( ) How is the device's energy conversion performance ultimately affected as a function the morphology variations -> Discuss trends observed in Jsc, Voc, FF, efficiency values.
-    ___
+ ___
 ** Many-Body Effects:
 *** Bandgap Narrowing:
     -
 *** Band Tailing:
 *** Impurinty Band Formation:
 *** Impurinty Band Formation:
+ ___
+** Beta Generation:
+   - Beta particle emission is a Poissonian process, meaning the probability of a beta particle emission event can be described by a Poissonian *random variable*.
+
 
 
 

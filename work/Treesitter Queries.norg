@@ -1,0 +1,20 @@
+@document.meta
+title: Treesitter Queries
+description:
+authors: thegusbus
+categories:
+created: 2023-07-19
+updated: 2023-07-19
+version: 1.1.1
+@end
+
+Finding basic parameter types:
+(parameters
+  (typed_parameter
+    type: (type) @type (#eq? @type "float")))
+
+Finding wildcard match case:
+(case_clause
+  (case_pattern
+    (identifier) @id))
+
